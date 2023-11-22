@@ -18,29 +18,37 @@ function selectRandomItems() {
 }
 function letterHandler(letter){
     clicked.indexOf(letter)=== -1 ? clicked.push(letter) : null;
+
     document.getElementById(letter).className="used";
     if (randomItems.indexOf(letter) >= 0){
         setUnderScores();
         chekIfWon()
         
     } else if (randomItems.indexOf(letter) === -1){
-        mistakes ++ ;
+         if(mistakes< 6){
+            mistakes ++ ;
         checkIfLost();
-        updateHangmanPicture();
+        updateHangmanPicture();}
+        }
         
     }
-}
+    
+    function checkIfLost(){
+        if(mistakes === 6){
+            document.getElementById("gameover").querySelector("p").style.display="block";
+            document.getElementById("clue").querySelector("p").innerHTML=`<p>کلمه -->${randomItems}<-- بود متاسفانه اشتباه گفتی</p>`
+            setTimeout(() => {
+                restart() 
+            }, 1000);
+        }
 
-function checkIfLost(){
-    if(mistakes === 6){
-        document.getElementById("gameover").querySelector("p").style.display="block";
-        document.getElementById("clue").querySelector("p").innerHTML=`<p>کلمه -->${randomItems}<-- بود متاسفانه اشتباه گفتی</p>`
+        
     }
-}
-function updateHangmanPicture (){
-    let image=document.getElementById("image").querySelector("img");
-    image.src=`./assets/hangman${mistakes}.png`
-}
+    function updateHangmanPicture (){
+        let image=document.getElementById("image").querySelector("img");
+        image.src=`./assets/hangman${mistakes}.png`
+    }
+
 
 function chekIfWon(){
    if (randomItems === result) {
@@ -71,4 +79,20 @@ function keyHandler(event) {
 
 selectRandomItems();
 setUnderScores();
-console.log (randomItems)
+
+function restart(){
+
+    if(window.confirm("you Lost do you want try again?")){
+        clicked=[];
+         result="";
+         mistakes= 0;
+        updateHangmanPicture();
+        let image=document.getElementById("image").querySelector("img");
+        image.src=`./assets/hangman0.png`;
+        document.getElementById("clue").querySelector("p").innerHTML=`  <p>________</p>`
+        document.getElementById("gameover").querySelector("p").style.display="none";
+        selectRandomItems();
+
+}
+
+}

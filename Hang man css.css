@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Lateef:wght@500&display=swap');
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lateef', serif;
 }
 
 html{
-    height: 100%;
-    margin: 0;
+    height: 100vh;
 }
 
 body {
@@ -18,16 +22,22 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     background-color: rgb(216, 255, 252);
  }
+ .container{
+    display: flex;
+ }
+ .options{
+    width: 50%;
+ }
  #letters {
    display: flex;
    flex-wrap: wrap;
    justify-content: space-between;
    margin: 1em 0;
+   width: 50%;
 }
 #letters div{
 border: 1px solid black;
 border-radius: 50%;
-margin: 5px;
 width:1.5em;
 height:1.5em;
 background-color: rgb(197, 253, 253);
@@ -45,7 +55,7 @@ background-color: rgb(197, 253, 253);
     letter-spacing: -1px;
 
 }
-#letters div.used{
+.used{
     background-color: azure;
     opacity: .4;
 }
@@ -53,4 +63,14 @@ section#gameover p {
     text-align: center;
     font-size: 3rem;
     display: none;
+ }
+
+ @media(width<=425px) {
+    #letters{
+        font-size: 1.5rem;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    
  }
